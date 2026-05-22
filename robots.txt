@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://parallelspaces.github.io/parallelspaces/sitemap.xml
