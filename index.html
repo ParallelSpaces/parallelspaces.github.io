@@ -69,25 +69,74 @@
 <!-- ===================== HERO ===================== -->
 <header class="hero">
   <div class="wrap">
-    <img class="hero-icon" src="assets/img/icon.svg" alt="Parallel Spaces app icon">
-    <h1>Run any Mac app twice.</h1>
-    <p class="hero-sub">Two accounts, side by side. Parallel Spaces runs fully isolated copies of the apps you already use — separate logins, separate data, zero mix-ups.</p>
-    <div class="hero-cta">
-      <a class="appstore-badge" href="https://apps.apple.com/app/id6772172563" aria-label="Download Parallel Spaces on the Mac App Store">
-        <!-- Replace with Apple's official badge asset before launch -->
-        <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-          <rect width="120" height="40" rx="8" fill="#000"/>
-          <g transform="translate(10,8) scale(0.92)">
-            <path fill="#fff" d="M17.05 12.04c-.03-3.16 2.58-4.67 2.7-4.75-1.47-2.15-3.76-2.45-4.57-2.48-1.94-.2-3.79 1.14-4.78 1.14-.99 0-2.51-1.11-4.13-1.08-2.12.03-4.08 1.23-5.17 3.13-2.21 3.83-.56 9.5 1.58 12.61 1.05 1.52 2.3 3.23 3.93 3.17 1.58-.06 2.17-1.02 4.08-1.02 1.9 0 2.44 1.02 4.11.99 1.7-.03 2.77-1.55 3.81-3.08 1.2-1.77 1.69-3.49 1.71-3.58-.04-.02-3.28-1.26-3.31-5.01z"/>
-            <path fill="#fff" d="M14.09 4.36c.87-1.06 1.46-2.53 1.3-4-1.25.05-2.77.84-3.67 1.89-.81.93-1.51 2.42-1.32 3.85 1.4.11 2.82-.71 3.69-1.74z"/>
-          </g>
-          <text x="42" y="16" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="6.5">Download on the</text>
-          <text x="42" y="31" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.3">App Store</text>
-        </svg>
-      </a>
-      <a class="btn btn-ghost" href="#how">See how it works</a>
+    <div class="hero-grid">
+
+      <!-- LEFT — app window mockup. Swap for a real screenshot:
+           drop a PNG in assets/img/ and replace this block with
+           <img src="assets/img/hero.png" alt="Parallel Spaces"> -->
+      <figure class="hero-mock" aria-label="Parallel Spaces app screenshot">
+        <div class="window-mock">
+          <div class="window-titlebar">
+            <span class="tl-dot tl-red"></span>
+            <span class="tl-dot tl-yellow"></span>
+            <span class="tl-dot tl-green"></span>
+            <span class="window-title">Parallel Spaces</span>
+          </div>
+          <div class="window-body">
+            <aside class="mock-sidebar">
+              <div class="mock-side mock-side-active">
+                <span class="mock-side-ic">▦</span> My Spaces <span class="mock-pill">6</span>
+              </div>
+              <div class="mock-side"><span class="mock-side-ic">▢</span> App Catalog <span class="mock-pill">14</span></div>
+              <div class="mock-side"><span class="mock-side-ic">⚙</span> Settings</div>
+              <div class="mock-new">+ New Space</div>
+            </aside>
+            <main class="mock-main">
+              <div class="mock-toolbar">
+                <span class="mock-chip mock-chip-on">All</span>
+                <span class="mock-chip">Running</span>
+                <span class="mock-chip">Stopped</span>
+              </div>
+              <div class="mock-grid">
+                <div class="mock-tile" style="--tile:#5e5ce6"><div class="mock-ic">W</div><div class="mock-tname">Work Slack</div><div class="mock-tmeta">Used 2m ago</div><div class="mock-tbtn">Launch</div></div>
+                <div class="mock-tile" style="--tile:#34c759"><div class="mock-ic">P</div><div class="mock-tname">Personal Chrome</div><div class="mock-tmeta running">● Running</div><div class="mock-tbtn">Running</div></div>
+                <div class="mock-tile" style="--tile:#ff9500"><div class="mock-ic">2</div><div class="mock-tname">Side Spotify</div><div class="mock-tmeta">Never used</div><div class="mock-tbtn">Launch</div></div>
+                <div class="mock-tile" style="--tile:#af52de"><div class="mock-ic">G</div><div class="mock-tname">Gmail (Work)</div><div class="mock-tmeta">Used 1h ago</div><div class="mock-tbtn">Launch</div></div>
+                <div class="mock-tile" style="--tile:#ff3b30"><div class="mock-ic">C</div><div class="mock-tname">Client A</div><div class="mock-tmeta">Used yesterday</div><div class="mock-tbtn">Launch</div></div>
+                <div class="mock-tile" style="--tile:#5ac8fa"><div class="mock-ic">N</div><div class="mock-tname">Notion (Team)</div><div class="mock-tmeta running">● Running</div><div class="mock-tbtn">Running</div></div>
+              </div>
+            </main>
+          </div>
+        </div>
+      </figure>
+
+      <!-- RIGHT — brand + download -->
+      <div class="hero-copy">
+        <div class="hero-brand">
+          <img class="hero-icon" src="assets/img/icon.svg" alt="Parallel Spaces icon">
+          <span class="hero-name">Parallel Spaces</span>
+        </div>
+        <h1>Run any Mac app twice.</h1>
+        <p class="hero-sub">Two accounts, side by side. Fully isolated copies of the apps you already use — separate logins, separate data, zero mix-ups.</p>
+        <div class="hero-cta">
+          <a class="appstore-badge" href="https://apps.apple.com/app/id6772172563" aria-label="Download Parallel Spaces on the Mac App Store">
+            <!-- Replace with Apple's official badge asset before launch -->
+            <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+              <rect width="120" height="40" rx="8" fill="#000"/>
+              <g transform="translate(10,8) scale(0.92)">
+                <path fill="#fff" d="M17.05 12.04c-.03-3.16 2.58-4.67 2.7-4.75-1.47-2.15-3.76-2.45-4.57-2.48-1.94-.2-3.79 1.14-4.78 1.14-.99 0-2.51-1.11-4.13-1.08-2.12.03-4.08 1.23-5.17 3.13-2.21 3.83-.56 9.5 1.58 12.61 1.05 1.52 2.3 3.23 3.93 3.17 1.58-.06 2.17-1.02 4.08-1.02 1.9 0 2.44 1.02 4.11.99 1.7-.03 2.77-1.55 3.81-3.08 1.2-1.77 1.69-3.49 1.71-3.58-.04-.02-3.28-1.26-3.31-5.01z"/>
+                <path fill="#fff" d="M14.09 4.36c.87-1.06 1.46-2.53 1.3-4-1.25.05-2.77.84-3.67 1.89-.81.93-1.51 2.42-1.32 3.85 1.4.11 2.82-.71 3.69-1.74z"/>
+              </g>
+              <text x="42" y="16" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="6.5">Download on the</text>
+              <text x="42" y="31" fill="#fff" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="600" letter-spacing="-0.3">App Store</text>
+            </svg>
+          </a>
+          <a class="btn btn-ghost" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">Native macOS · No virtual machine · Free on the Mac App Store</p>
+      </div>
+
     </div>
-    <p class="hero-note">Native macOS app · No virtual machine · Free on the Mac App Store</p>
   </div>
 </header>
 

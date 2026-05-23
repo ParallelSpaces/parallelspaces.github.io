@@ -127,34 +127,148 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
 .appstore-badge:hover { opacity: .82; text-decoration: none; }
 .appstore-badge svg { height: 52px; width: auto; }
 
-/* ---- Hero -------------------------------------------------- */
+/* ---- Hero (split: mockup left, brand + download right) ------ */
 
 .hero {
-  text-align: center;
-  padding: 80px 0 72px;
+  padding: 64px 0 80px;
   background:
-    radial-gradient(60% 50% at 50% 0%,
-      color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%);
+    radial-gradient(70% 55% at 18% 0%,
+      color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(55% 50% at 95% 30%,
+      color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 70%);
+}
+.hero-grid {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
+  gap: 56px; align-items: center;
+}
+
+/* RIGHT — brand + download */
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.hero-brand {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
 }
 .hero-icon {
-  width: 132px; height: 132px; margin: 0 auto 30px;
-  border-radius: 30px; box-shadow: var(--shadow);
+  width: 64px; height: 64px; border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.hero-name {
+  font-size: 21px; font-weight: 600; letter-spacing: -0.01em;
 }
 .hero h1 {
-  font-size: clamp(40px, 6.4vw, 76px);
-  background: linear-gradient(180deg, var(--text), color-mix(in srgb, var(--text) 70%, var(--accent)));
+  font-size: clamp(40px, 5.6vw, 72px); letter-spacing: -0.025em;
+  background: linear-gradient(180deg, var(--text), color-mix(in srgb, var(--text) 60%, var(--accent)));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .hero-sub {
-  font-size: clamp(19px, 2.4vw, 25px); color: var(--text-soft);
-  max-width: 620px; margin: 20px auto 8px;
+  font-size: clamp(17px, 1.6vw, 21px); color: var(--text-soft);
+  margin: 18px 0 4px; max-width: 520px;
 }
 .hero-cta {
-  margin-top: 30px; display: flex; gap: 16px;
-  align-items: center; justify-content: center; flex-wrap: wrap;
+  margin-top: 26px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
 }
-.hero-note { margin-top: 16px; font-size: 13px; color: var(--text-faint); }
+.hero-note { margin-top: 18px; font-size: 13px; color: var(--text-faint); }
+
+/* LEFT — macOS window mockup */
+.hero-mock { margin: 0; }
+.window-mock {
+  border-radius: 14px; overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  box-shadow:
+    0 30px 80px -20px rgba(60, 40, 120, .35),
+    0 12px 30px -6px rgba(0, 0, 0, .18);
+  transform: perspective(2400px) rotateY(-2deg) rotateX(1deg);
+  transition: transform .35s ease;
+}
+.window-mock:hover { transform: perspective(2400px) rotateY(0) rotateX(0); }
+@media (prefers-color-scheme: dark) {
+  .window-mock {
+    box-shadow:
+      0 30px 80px -20px rgba(0, 0, 0, .8),
+      0 12px 30px -6px rgba(0, 0, 0, .5);
+  }
+}
+.window-titlebar {
+  height: 32px; display: flex; align-items: center; gap: 7px;
+  padding: 0 14px; border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-alt) 80%, var(--bg-card)),
+    var(--bg-alt));
+}
+.tl-dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.tl-red    { background: #ff5f57; }
+.tl-yellow { background: #febc2e; }
+.tl-green  { background: #28c840; }
+.window-title {
+  margin-left: auto; margin-right: auto; font-size: 12px; font-weight: 500;
+  color: var(--text-soft); transform: translateX(-30px);
+}
+.window-body { display: grid; grid-template-columns: 168px 1fr; min-height: 380px; }
+
+/* Sidebar */
+.mock-sidebar {
+  background: var(--bg-alt); border-right: 1px solid var(--line);
+  padding: 14px 10px; display: flex; flex-direction: column; gap: 4px;
+}
+.mock-side {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 7px;
+  font-size: 12.5px; color: var(--text-soft);
+}
+.mock-side-active {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text);
+}
+.mock-side-ic { font-size: 12px; opacity: .8; width: 14px; text-align: center; }
+.mock-pill {
+  margin-left: auto; font-size: 10px; font-weight: 600;
+  padding: 1px 7px; border-radius: 980px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  color: var(--text-soft);
+}
+.mock-new {
+  margin-top: auto; padding: 8px; border-radius: 8px;
+  background: var(--accent); color: #fff;
+  font-size: 12px; font-weight: 600; text-align: center;
+}
+
+/* Main */
+.mock-main { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.mock-toolbar { display: flex; gap: 6px; }
+.mock-chip {
+  font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 980px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text-soft);
+}
+.mock-chip-on { background: var(--accent); color: #fff; }
+
+.mock-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px;
+}
+.mock-tile {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 9px; display: flex; flex-direction: column;
+  align-items: center; gap: 4px; text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+.mock-ic {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--tile, var(--accent)) 100%, transparent),
+    color-mix(in srgb, var(--tile, var(--accent)) 70%, #000));
+  color: #fff; font-weight: 700; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--tile, var(--accent)) 40%, transparent);
+}
+.mock-tname { font-size: 11px; font-weight: 600; color: var(--text); }
+.mock-tmeta { font-size: 10px; color: var(--text-faint); }
+.mock-tmeta.running { color: #28c840; }
+.mock-tbtn {
+  font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 980px;
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--accent-ink); margin-top: 2px;
+}
 
 /* ---- Media frames (video + screenshots) -------------------- */
 
@@ -368,6 +482,10 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   .split { grid-template-columns: 1fr; }
   .shots { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  /* Stack hero — mock on top, copy below */
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-copy { align-items: flex-start; }
+  .window-mock { transform: none; }
 }
 
 @media (max-width: 600px) {
@@ -376,17 +494,22 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   .nav-links { display: none; }
   .grid, .steps, .privacy-grid, .shots { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .hero { padding: 56px 0 52px; }
-  .hero-icon { width: 108px; height: 108px; }
-  .hero-cta { flex-direction: column; }
+  .hero { padding: 48px 0 56px; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
   .hero-cta .btn, .hero-cta .appstore-badge { width: 100%; justify-content: center; }
+  .hero-icon { width: 54px; height: 54px; }
+  .hero-name { font-size: 18px; }
+  .window-body { grid-template-columns: 130px 1fr; min-height: 320px; }
+  .mock-grid { grid-template-columns: repeat(2, 1fr); }
   .release-date { margin-left: 0; width: 100%; }
 }
 
-/* Landscape phones — keep hero compact */
+/* Landscape phones — compact, side-by-side again */
 @media (max-height: 520px) and (orientation: landscape) {
-  .hero { padding: 40px 0 36px; }
-  .hero-icon { width: 84px; height: 84px; margin-bottom: 18px; }
+  .hero { padding: 28px 0 36px; }
+  .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; }
+  .window-body { min-height: 280px; }
+  .hero-icon { width: 48px; height: 48px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
