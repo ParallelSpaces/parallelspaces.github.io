@@ -44,7 +44,7 @@
     {
       "@type": "Question",
       "name": "Does Parallel Spaces collect my data?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. There is no tracking, no analytics and no account required. Every space and all of its data stay entirely on your Mac." }
+      "acceptedAnswer": { "@type": "Answer", "text": "No personal data. There is no tracking, no analytics, no account and no server of ours that sees you. The app does send anonymous crash reports through Firebase Crashlytics so we can fix bugs — these contain only technical diagnostics, never any contents of your spaces." }
     },
     {
       "@type": "Question",
@@ -164,7 +164,8 @@
       <details class="faq-item">
         <summary>Does it work with Safari?</summary>
         <div class="answer">
-          <p>Safari is built by Apple to run as a single process and can't be multi-instanced. For multiple browser profiles, use a Chromium-based browser (Chrome, Edge, Brave, Arc, Vivaldi) or Firefox — all of those work well. For specific sites, a web app space is the better answer.</p>
+          <p>Sadly, no. Apple only lets one copy of Safari run on your Mac, so you can't have two Safari windows signed into two different Apple IDs at the same time. That's a Safari limitation — Parallel Spaces can't work around it.</p>
+          <p>The good news: every other Mac browser does work. Run multiple copies of <strong>Chrome, Edge, Brave, Arc, Vivaldi or Firefox</strong> in Parallel Spaces. For a single website like Gmail or WhatsApp Web, turn it into a <em>web app space</em> instead — same result, fewer browser tabs.</p>
         </div>
       </details>
 
@@ -217,7 +218,9 @@
       <details class="faq-item">
         <summary>Does Parallel Spaces collect any data?</summary>
         <div class="answer">
-          <p>No. No analytics, no telemetry, no tracking, and no account to sign up for. See the <a href="privacy.html">Privacy Policy</a> for the full details.</p>
+          <p>No personal data. There's no analytics, no tracking, no account to sign up for, and no server of ours that sees you or your spaces.</p>
+          <p>The one thing the app does send is an <strong>anonymous crash report</strong>, through <strong>Firebase Crashlytics</strong> (by Google), if the app crashes. The report includes diagnostic details — call stack, app version, macOS version — and <em>nothing</em> from inside your spaces: no logins, no cookies, no files, no identifier that ties the crash to you.</p>
+          <p>See the <a href="privacy.html">Privacy Policy</a> for the full picture.</p>
         </div>
       </details>
 
@@ -322,7 +325,7 @@
           <img src="assets/img/icon.svg" alt="Parallel Spaces icon">
           <span>Parallel Spaces</span>
         </div>
-        <p>Run any Mac app twice. Multiple accounts, fully isolated, on a single Mac.</p>
+        <p>Run any Mac app multiple times. Independent accounts, fully isolated, on a single Mac.</p>
       </div>
       <div>
         <h4>Product</h4>
