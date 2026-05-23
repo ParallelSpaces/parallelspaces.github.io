@@ -9,51 +9,6 @@
         sends no CORS headers, so we use JSONP via ?callback=.
    ============================================================ */
 
-/* ---- 0. FAQ search (faq.html only) ------------------------- */
-(function () {
-  "use strict";
-  var input = document.getElementById("faq-search");
-  if (!input) return;
-
-  var items   = Array.prototype.slice.call(document.querySelectorAll(".faq-item"));
-  var groups  = Array.prototype.slice.call(document.querySelectorAll(".faq-group-title"));
-  var empty   = document.getElementById("faq-empty");
-
-  function filter() {
-    var q = input.value.trim().toLowerCase();
-    var anyVisible = false;
-
-    items.forEach(function (item) {
-      var text  = item.textContent.toLowerCase();
-      var match = q === "" || text.indexOf(q) !== -1;
-      item.style.display = match ? "" : "none";
-      if (match) {
-        anyVisible = true;
-        item.open = q !== "";   // auto-expand matches, collapse when cleared
-      }
-    });
-
-    // Hide a group header if every item under it is hidden.
-    groups.forEach(function (g) {
-      var sib = g.nextElementSibling;
-      var hasAny = false;
-      while (sib && !sib.classList.contains("faq-group-title")) {
-        if (sib.classList && sib.classList.contains("faq-item")
-            && sib.style.display !== "none") { hasAny = true; break; }
-        sib = sib.nextElementSibling;
-      }
-      g.style.display = (q === "" || hasAny) ? "" : "none";
-    });
-
-    if (empty) empty.hidden = anyVisible || q === "";
-  }
-
-  input.addEventListener("input", filter);
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { input.value = ""; filter(); input.blur(); }
-  });
-})();
-
 /* ---- 1. Mac App Store deep-link ---------------------------- */
 (function () {
   "use strict";
