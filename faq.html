@@ -48,6 +48,11 @@
     },
     {
       "@type": "Question",
+      "name": "What is a sandbox?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sandboxing is a macOS security feature. A sandboxed app is walled off from the rest of your Mac — it can only read and write its own private folders, and only do things you explicitly allow. Apple requires every Mac App Store app to be sandboxed. The downside: the sandbox sometimes blocks an app from launching a second copy of itself, which is why a small number of apps stay single-instance." }
+    },
+    {
+      "@type": "Question",
       "name": "Are there apps that won't work?",
       "acceptedAnswer": { "@type": "Answer", "text": "A few. Some apps are built to allow only one running copy, or are blocked by macOS sandboxing from running twice. When an app can't be multi-instanced, that's a limitation of the app itself, not of Parallel Spaces." }
     }
@@ -85,6 +90,11 @@
 <section style="padding-top:24px;">
   <div class="wrap">
     <div class="faq-list">
+
+      <input type="search" id="faq-search" class="faq-search"
+             placeholder="Search the FAQ…" autocomplete="off"
+             aria-label="Search the FAQ">
+      <p id="faq-empty" class="faq-empty" hidden>No questions match your search.</p>
 
       <div class="faq-group-title">Getting started</div>
 
@@ -140,9 +150,17 @@
       </details>
 
       <details class="faq-item">
+        <summary>What is a "sandbox"?</summary>
+        <div class="answer">
+          <p>Sandboxing is a macOS security feature. A sandboxed app is walled off from the rest of your Mac — it can only read and write its own private folders, and it can only do things you explicitly allow (like picking a file). Apple requires every app on the Mac App Store to be sandboxed, including Parallel Spaces itself.</p>
+          <p>It's great for security. The downside: the same sandbox sometimes blocks an app from launching a second copy of itself. When that happens, no third-party app — Parallel Spaces included — can override macOS's rule. That's why a small number of apps stay single-instance.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
         <summary>Are there apps that won't work?</summary>
         <div class="answer">
-          <p>A few, yes — and we'd rather be upfront about it. Some apps are deliberately built to allow only one running copy. Others are blocked by macOS sandbox rules from launching twice. In those cases the limitation comes from the app itself, not from Parallel Spaces.</p>
+          <p>A few, yes — and we'd rather be upfront about it. Some apps are deliberately built to allow only one running copy. Others are blocked by the macOS sandbox (see above) from launching twice. In those cases the limitation comes from the app itself, not from Parallel Spaces.</p>
           <p>The good news: the large majority of everyday apps — browsers, messengers, Electron apps and web apps — work well.</p>
         </div>
       </details>
