@@ -53,10 +53,10 @@
       <p class="updated">Last updated: 22 May 2026</p>
 
       <h2>Our approach</h2>
-      <p>Parallel Spaces is built to keep your accounts apart — and to keep your data yours. The app does not collect, transmit, sell or share personal information. There is no analytics, no telemetry and no advertising. You do not need an account to use it.</p>
+      <p>Parallel Spaces is built to keep your accounts apart — and to keep your data yours. <strong>We don't run a server of our own</strong> — there's no backend that sees you, your spaces or what you do with them. The app doesn't collect, transmit, sell or share personal information; there's no analytics, no telemetry and no advertising; and you don't need an account to use it.</p>
 
       <h2>What we collect</h2>
-      <p>Nothing personal. Parallel Spaces has no sign-up, no user profiles and no usage tracking. We do not know who you are, which apps you run, or how you use the app.</p>
+      <p>Nothing personal. Parallel Spaces has no sign-up, no user profiles and no usage tracking. We do not know who you are, which apps you run, or how you use the app. The only diagnostic data the app sends is anonymous crash reports — see the <em>Crash reports</em> section below.</p>
 
       <h2>Your spaces and their data</h2>
       <p>Every space you create — and all of its logins, cookies, files and settings — is stored locally on your Mac, in a private directory belonging to that space. This data:</p>
@@ -71,11 +71,16 @@
       <ul>
         <li><strong>App compatibility catalog.</strong> The app downloads a small, public catalog file that describes how various apps can be isolated. This request is anonymous and contains no personal data.</li>
         <li><strong>Update checks.</strong> The app may check the Mac App Store for a newer version using Apple's standard service. This is handled by Apple.</li>
+        <li><strong>Crash reports.</strong> See the section below.</li>
       </ul>
       <p>Separately, the apps and websites you run <em>inside</em> a space connect to their own servers as normal. Those connections are governed by the privacy policies of those apps and services — not by Parallel Spaces.</p>
 
+      <h2>Crash reports</h2>
+      <p>If the app crashes, an anonymous technical report is sent through <strong>Firebase Crashlytics (by Google)</strong> so we can find and fix bugs faster. The report contains diagnostic information — call stack, app version, macOS version, device model — and <em>nothing</em> from inside your spaces: no logins, no cookies, no files, no contents of any app you run in a space, and no identifier that ties the crash to you personally.</p>
+      <p>Crashlytics is operated by Google under its own privacy policy. Crash reporting follows the macOS-wide setting for sharing analytics with developers; you can turn it off in <em>System Settings &rsaquo; Privacy &amp; Security &rsaquo; Analytics &amp; Improvements</em>.</p>
+
       <h2>Third parties</h2>
-      <p>Parallel Spaces is distributed through the Apple Mac App Store. The compatibility catalog is hosted on Cloudflare. These providers may record standard, non-identifying technical request data (such as IP address and timestamp) under their own privacy policies as part of delivering the service. We do not receive personal information from them.</p>
+      <p>Parallel Spaces is distributed through the <strong>Apple Mac App Store</strong>. The compatibility catalog is hosted on <strong>Cloudflare</strong>. Anonymous crash reports go to <strong>Google (Firebase Crashlytics)</strong>. These providers may record standard, non-identifying technical request data (such as IP address and timestamp) under their own privacy policies as part of delivering the service. We do not receive personal information from any of them.</p>
 
       <h2>No tracking</h2>
       <p>We do not use cookies for tracking, advertising identifiers, fingerprinting, or any third-party analytics within the app. This website does not run analytics or advertising scripts.</p>

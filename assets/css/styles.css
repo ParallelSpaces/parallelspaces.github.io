@@ -11,9 +11,9 @@
   --text-soft:     #515154;
   --text-faint:    #86868b;
   --line:          #d2d2d7;
-  --accent:        #6e5cf0;
-  --accent-2:      #a85cee;
-  --accent-ink:    #5a48e0;
+  --accent:        #0a84ff;
+  --accent-2:      #5ac8fa;
+  --accent-ink:    #0071e3;
   --radius:        20px;
   --radius-sm:     12px;
   --maxw:          1080px;
@@ -122,10 +122,11 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   border: 1px solid var(--line);
 }
 
-/* App Store badge */
-.appstore-badge { display: inline-block; transition: opacity .15s ease; }
+/* App Store badge — official Apple lockup, light + dark via <picture> */
+.appstore-badge { display: inline-block; line-height: 0; transition: opacity .15s ease; }
 .appstore-badge:hover { opacity: .82; text-decoration: none; }
-.appstore-badge svg { height: 52px; width: auto; }
+.appstore-badge img,
+.appstore-badge svg { height: 48px; width: auto; display: block; }
 
 /* ---- Hero (split: mockup left, brand + download right) ------ */
 
@@ -176,7 +177,7 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   background: var(--bg-card);
   border: 1px solid var(--line);
   box-shadow:
-    0 30px 80px -20px rgba(60, 40, 120, .35),
+    0 30px 80px -20px rgba(10, 60, 140, .28),
     0 12px 30px -6px rgba(0, 0, 0, .18);
   transform: perspective(2400px) rotateY(-2deg) rotateX(1deg);
   transition: transform .35s ease;
@@ -268,6 +269,24 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 980px;
   background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: var(--accent-ink); margin-top: 2px;
+}
+
+/* ---- "Missing on Mac" section ------------------------------ */
+
+.missing-grid {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 50px; align-items: center;
+}
+.missing-list {
+  list-style: none; display: flex; flex-direction: column; gap: 12px;
+}
+.missing-list li {
+  padding: 16px 18px; border-radius: 14px;
+  background: var(--bg-card); border: 1px solid var(--line);
+  font-size: 15px; color: var(--text-soft);
+}
+.missing-list li strong { color: var(--text); margin-right: 6px; }
+@media (max-width: 900px) {
+  .missing-grid { grid-template-columns: 1fr; gap: 28px; }
 }
 
 /* ---- Media frames (video + screenshots) -------------------- */
