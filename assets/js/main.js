@@ -1,12 +1,32 @@
 /* ============================================================
    Parallel Spaces — site scripts
-   What's New page: pull the latest release straight from the
-   Mac App Store via the public iTunes Lookup API.
-
-   The iTunes API sends no CORS headers, so a normal fetch() is
-   blocked in the browser — but it supports JSONP via ?callback=.
-   We inject a <script> tag and read the result that way.
+   Loaded on every page.
+     1. Rewrite App Store links to open the Mac App Store app
+        (macappstore://) when the visitor is on a real Mac.
+        Everywhere else, the regular web link is kept.
+     2. (whats-new.html only) Pull the latest release straight
+        from the App Store via the iTunes Lookup API. The API
+        sends no CORS headers, so we use JSONP via ?callback=.
    ============================================================ */
+
+/* ---- 1. Mac App Store deep-link ---------------------------- */
+(function () {
+  "use strict";
+  // iPadOS Safari reports as Mac but has touch — exclude it,
+  // because macappstore:// doesn't exist on iPad.
+  var isTouchMac = (navigator.maxTouchPoints || 0) > 1;
+  var isMac =
+    !isTouchMac && (
+      (navigator.userAgentData && navigator.userAgentData.platform === "macOS") ||
+      /Mac/.test(navigator.platform || "") ||
+      /Mac OS X/.test(navigator.userAgent || "")
+    );
+  if (!isMac) return;
+  var WEB = "https://apps.apple.com/app/id6772172563";
+  var APP = "macappstore://apps.apple.com/app/id6772172563";
+  var links = document.querySelectorAll('a[href="' + WEB + '"]');
+  for (var i = 0; i < links.length; i++) { links[i].href = APP; }
+})();
 
 (function () {
   "use strict";
