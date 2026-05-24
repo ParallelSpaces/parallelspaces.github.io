@@ -177,6 +177,73 @@
   padding: 60px 24px; color: var(--text-faint); font-size: 16px;
 }
 
+/* ── Request App modal ──────────────────────────────────── */
+.modal-backdrop {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.48);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; padding: 24px;
+}
+.modal-backdrop.open { display: flex; }
+.modal-box {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: 20px; padding: 36px; max-width: 460px; width: 100%;
+  box-shadow: 0 24px 80px rgba(0,0,0,.28);
+  animation: modal-in .22s cubic-bezier(.34,1.4,.64,1) both;
+}
+@keyframes modal-in {
+  from { transform: scale(.93); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.modal-close {
+  float: right; background: none; border: none; cursor: pointer;
+  font-size: 22px; line-height: 1; color: var(--text-faint);
+  margin: -8px -8px 0 0; padding: 4px 8px; border-radius: 6px;
+  font-family: inherit;
+}
+.modal-close:hover { color: var(--text); background: color-mix(in srgb, var(--text) 8%, transparent); }
+.modal-box h2 { font-size: 22px; margin-bottom: 6px; clear: both; }
+.modal-box .modal-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 24px; }
+
+.form-field { margin-bottom: 16px; }
+.form-field label {
+  display: block; font-size: 13px; font-weight: 600; color: var(--text-soft);
+  margin-bottom: 6px; letter-spacing: .01em;
+}
+.form-field input {
+  width: 100%; padding: 11px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--bg);
+  color: var(--text); font-family: inherit; font-size: 15px;
+  outline: none; transition: border-color .15s ease;
+}
+.form-field input:focus { border-color: var(--accent); }
+.form-field input::placeholder { color: var(--text-faint); }
+
+.modal-submit {
+  width: 100%; margin-top: 8px; padding: 13px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 980px; font-size: 16px; font-weight: 600;
+  cursor: pointer; font-family: inherit;
+  transition: opacity .15s ease, transform .15s ease;
+}
+.modal-submit:hover:not(:disabled) { opacity: .9; transform: translateY(-1px); }
+.modal-submit:disabled { opacity: .5; cursor: default; transform: none; }
+
+.modal-success {
+  text-align: center; padding: 12px 0 4px;
+}
+.modal-success .success-ic {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: color-mix(in srgb, #34c759 14%, transparent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; margin: 0 auto 16px;
+}
+.modal-success h3 { font-size: 20px; margin-bottom: 8px; }
+.modal-success p  { font-size: 15px; color: var(--text-soft); line-height: 1.5; }
+.modal-err {
+  font-size: 13px; color: #ff3b30; margin-top: 8px; text-align: center;
+}
+
 /* Section grouping within grid */
 .category-header {
   grid-column: 1 / -1;
@@ -232,8 +299,46 @@
     <h1>Compatibility</h1>
     <p>Which Mac apps work with Parallel Spaces — and how.<br>
        Live from the catalog · updated every 6 hours.</p>
+    <button class="btn btn-ghost" id="request-app-btn" style="margin-top:20px;font-size:15px;">
+      + Request an App
+    </button>
   </div>
 </header>
+
+<!-- ===================== REQUEST APP MODAL ===================== -->
+<div class="modal-backdrop" id="request-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close-btn" aria-label="Close">×</button>
+
+    <!-- Form view -->
+    <div id="modal-form-view">
+      <h2 id="modal-title">Request an App</h2>
+      <p class="modal-sub">Don't see your app? Let us know — we'll test it and add it to the catalog.</p>
+      <div class="form-field">
+        <label for="req-name">App Name</label>
+        <input type="text" id="req-name" placeholder="e.g. Figma" autocomplete="off" required>
+      </div>
+      <div class="form-field">
+        <label for="req-link">App Website or Download Link</label>
+        <input type="url" id="req-link" placeholder="https://…" autocomplete="off">
+      </div>
+      <div class="form-field">
+        <label for="req-email">Your Email <span style="color:var(--text-faint);font-weight:400">(optional)</span></label>
+        <input type="email" id="req-email" placeholder="you@example.com" autocomplete="email">
+      </div>
+      <button class="modal-submit" id="modal-submit-btn">Send Request</button>
+      <p class="modal-err" id="modal-err" style="display:none"></p>
+    </div>
+
+    <!-- Success view -->
+    <div id="modal-success-view" class="modal-success" style="display:none">
+      <div class="success-ic">✓</div>
+      <h3>Request sent!</h3>
+      <p>The developer will look into it and contact you when there's an update — usually within a few days.</p>
+      <button class="modal-submit" id="modal-done-btn" style="margin-top:24px;">Done</button>
+    </div>
+  </div>
+</div>
 
 <!-- ===================== CATALOG ===================== -->
 <section style="padding-top:32px;">
@@ -605,6 +710,103 @@
 
   // ── Boot ─────────────────────────────────────────────────
   loadCatalog(false);
+})();
+</script>
+
+<script>
+// ── Request App modal ────────────────────────────────────────
+(function () {
+  'use strict';
+
+  const backdrop   = document.getElementById('request-modal');
+  const openBtn    = document.getElementById('request-app-btn');
+  const closeBtn   = document.getElementById('modal-close-btn');
+  const submitBtn  = document.getElementById('modal-submit-btn');
+  const doneBtn    = document.getElementById('modal-done-btn');
+  const formView   = document.getElementById('modal-form-view');
+  const successView= document.getElementById('modal-success-view');
+  const errEl      = document.getElementById('modal-err');
+  const nameEl     = document.getElementById('req-name');
+  const linkEl     = document.getElementById('req-link');
+  const emailEl    = document.getElementById('req-email');
+
+  function openModal() {
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    nameEl.focus();
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    // reset after animation
+    setTimeout(() => {
+      formView.style.display    = '';
+      successView.style.display = 'none';
+      errEl.style.display       = 'none';
+      errEl.textContent         = '';
+      nameEl.value = linkEl.value = emailEl.value = '';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Request';
+    }, 300);
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  doneBtn.addEventListener('click', closeModal);
+
+  // Close on backdrop click
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+
+  submitBtn.addEventListener('click', async () => {
+    const name  = nameEl.value.trim();
+    const link  = linkEl.value.trim();
+    const email = emailEl.value.trim();
+
+    if (!name) {
+      showErr('App name is required.');
+      nameEl.focus();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    errEl.style.display = 'none';
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/29satnam@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `App Request: ${name}`,
+          'App Name': name,
+          'App Link': link || '(not provided)',
+          'User Email': email || '(not provided)',
+          _captcha: 'false',
+          _template: 'table',
+        }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      formView.style.display    = 'none';
+      successView.style.display = '';
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Request';
+      showErr('Something went wrong. Please try again or email 29satnam@gmail.com directly.');
+    }
+  });
+
+  function showErr(msg) {
+    errEl.textContent    = msg;
+    errEl.style.display  = '';
+  }
 })();
 </script>
 
