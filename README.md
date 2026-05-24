@@ -41,7 +41,7 @@ python3 -m http.server 8000
 1. Push to the `main` branch.
 2. GitHub → repo **Settings → Pages**.
 3. Source: **Deploy from a branch** → branch `main` → folder `/ (root)`.
-4. Live at `https://parallelspaces.github.io/parallelspaces/`.
+4. Live at `https://parallelspaces.github.io/`.
 
 `.nojekyll` makes Pages serve the files directly.
 
