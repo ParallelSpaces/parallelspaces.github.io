@@ -55,6 +55,84 @@
   });
 })();
 
+/* ---- Lightbox carousel ------------------------------------- */
+(function () {
+  "use strict";
+  var grid = document.getElementById("screenshots-grid");
+  var lb   = document.getElementById("lightbox");
+  if (!grid || !lb) return;
+
+  var imgEl     = document.getElementById("lb-img");
+  var closeBtn  = document.getElementById("lb-close");
+  var prevBtn   = document.getElementById("lb-prev");
+  var nextBtn   = document.getElementById("lb-next");
+  var counterEl = document.getElementById("lb-counter");
+
+  // Collect shots in DOM order
+  var shots = Array.prototype.slice.call(grid.querySelectorAll(".shot"));
+  if (!shots.length) return;
+
+  var items = shots.map(function (btn) {
+    var img = btn.querySelector("img");
+    return { src: img.src, alt: img.alt || "" };
+  });
+
+  var current = 0;
+
+  function show(i) {
+    current = (i + items.length) % items.length;
+    imgEl.src = items[current].src;
+    imgEl.alt = items[current].alt;
+    counterEl.textContent = (current + 1) + " / " + items.length;
+  }
+
+  function open(i) {
+    show(i);
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    lb.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  // Wire shot buttons
+  shots.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var idx = parseInt(btn.dataset.index || "0", 10);
+      open(idx);
+    });
+  });
+
+  closeBtn.addEventListener("click", close);
+  prevBtn.addEventListener("click", function (e) { e.stopPropagation(); show(current - 1); });
+  nextBtn.addEventListener("click", function (e) { e.stopPropagation(); show(current + 1); });
+
+  // Click outside image closes
+  lb.addEventListener("click", function (e) {
+    if (e.target === lb || e.target.classList.contains("lightbox-img-wrap")) close();
+  });
+
+  // Keyboard nav
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape")     close();
+    if (e.key === "ArrowLeft")  show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+
+  // Swipe on touch
+  var startX = null;
+  lb.addEventListener("touchstart", function (e) { startX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend",   function (e) {
+    if (startX == null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    startX = null;
+  });
+})();
+
 /* ---- 1. Mac App Store deep-link ---------------------------- */
 (function () {
   "use strict";

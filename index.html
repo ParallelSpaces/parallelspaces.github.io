@@ -70,43 +70,11 @@
   <div class="wrap">
     <div class="hero-grid">
 
-      <!-- LEFT — app window mockup. Swap for a real screenshot:
-           drop a PNG in assets/img/ and replace this block with
-           <img src="assets/img/hero.png" alt="Parallel Spaces"> -->
+      <!-- LEFT — hero landing screenshot -->
       <figure class="hero-mock" aria-label="Parallel Spaces app screenshot">
-        <div class="window-mock">
-          <div class="window-titlebar">
-            <span class="tl-dot tl-red"></span>
-            <span class="tl-dot tl-yellow"></span>
-            <span class="tl-dot tl-green"></span>
-            <span class="window-title">Parallel Spaces</span>
-          </div>
-          <div class="window-body">
-            <aside class="mock-sidebar">
-              <div class="mock-side mock-side-active">
-                <span class="mock-side-ic">▦</span> My Spaces <span class="mock-pill">6</span>
-              </div>
-              <div class="mock-side"><span class="mock-side-ic">▢</span> App Catalog <span class="mock-pill">14</span></div>
-              <div class="mock-side"><span class="mock-side-ic">⚙</span> Settings</div>
-              <div class="mock-new">+ New Space</div>
-            </aside>
-            <main class="mock-main">
-              <div class="mock-toolbar">
-                <span class="mock-chip mock-chip-on">All</span>
-                <span class="mock-chip">Running</span>
-                <span class="mock-chip">Stopped</span>
-              </div>
-              <div class="mock-grid">
-                <div class="mock-tile" style="--tile:#30b0c7"><div class="mock-ic">W</div><div class="mock-tname">Work Slack</div><div class="mock-tmeta">Used 2m ago</div><div class="mock-tbtn">Launch</div></div>
-                <div class="mock-tile" style="--tile:#34c759"><div class="mock-ic">P</div><div class="mock-tname">Personal Chrome</div><div class="mock-tmeta running">● Running</div><div class="mock-tbtn">Running</div></div>
-                <div class="mock-tile" style="--tile:#ff9500"><div class="mock-ic">2</div><div class="mock-tname">Side Spotify</div><div class="mock-tmeta">Never used</div><div class="mock-tbtn">Launch</div></div>
-                <div class="mock-tile" style="--tile:#ff2d55"><div class="mock-ic">G</div><div class="mock-tname">Gmail (Work)</div><div class="mock-tmeta">Used 1h ago</div><div class="mock-tbtn">Launch</div></div>
-                <div class="mock-tile" style="--tile:#ff3b30"><div class="mock-ic">C</div><div class="mock-tname">Client A</div><div class="mock-tmeta">Used yesterday</div><div class="mock-tbtn">Launch</div></div>
-                <div class="mock-tile" style="--tile:#5ac8fa"><div class="mock-ic">N</div><div class="mock-tname">Notion (Team)</div><div class="mock-tmeta running">● Running</div><div class="mock-tbtn">Running</div></div>
-              </div>
-            </main>
-          </div>
-        </div>
+        <img class="hero-img" src="assets/img/hero.png"
+             alt="Parallel Spaces showing multiple isolated app instances side by side"
+             width="1024" loading="eager" decoding="async">
       </figure>
 
       <!-- RIGHT — brand + download -->
@@ -345,10 +313,19 @@
       <h2>Designed to disappear.</h2>
       <p>Clean, familiar, and right at home on macOS.</p>
     </div>
-    <div class="shots">
-      <div class="shot">Screenshot 1 — My Spaces<br>(replace in assets/img)</div>
-      <div class="shot">Screenshot 2 — New Space wizard<br>(replace in assets/img)</div>
-      <div class="shot">Screenshot 3 — App catalog<br>(replace in assets/img)</div>
+    <div class="shots" id="screenshots-grid">
+      <button class="shot" data-index="0" aria-label="Open screenshot 1">
+        <img src="assets/img/screenshot-1.png" alt="My Spaces — list of isolated app instances" loading="lazy" decoding="async">
+      </button>
+      <button class="shot" data-index="1" aria-label="Open screenshot 2">
+        <img src="assets/img/screenshot-2.png" alt="New Space — pick an app to multi-instance" loading="lazy" decoding="async">
+      </button>
+      <button class="shot" data-index="2" aria-label="Open screenshot 3">
+        <img src="assets/img/screenshot-3.png" alt="Set Up Instance — name, color, badge and isolation options" loading="lazy" decoding="async">
+      </button>
+      <button class="shot" data-index="3" aria-label="Open screenshot 4">
+        <img src="assets/img/screenshot-4.png" alt="Menu bar — quick access to all running spaces" loading="lazy" decoding="async">
+      </button>
     </div>
   </div>
 </section>
@@ -361,6 +338,17 @@
     <a class="appstore-badge" href="https://apps.apple.com/app/id6772172563" aria-label="Download Parallel Spaces on the Mac App Store"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/img/app-store-badge-white.svg"><img src="assets/img/app-store-badge-black.svg" alt="Download on the Mac App Store" width="156" height="40"></picture></a>
   </div>
 </section>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button class="lb-btn lb-close" id="lb-close" aria-label="Close">×</button>
+  <button class="lb-btn lb-prev"  id="lb-prev"  aria-label="Previous">‹</button>
+  <button class="lb-btn lb-next"  id="lb-next"  aria-label="Next">›</button>
+  <div class="lightbox-img-wrap">
+    <img id="lb-img" src="" alt="">
+  </div>
+  <div class="lb-counter" id="lb-counter">1 / 4</div>
+</div>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="footer">
