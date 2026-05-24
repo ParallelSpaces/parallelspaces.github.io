@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>App Compatibility — Parallel Spaces | Which Mac Apps Work</title>
+<meta name="description" content="Live compatibility catalog for Parallel Spaces: which Mac apps support multiple isolated instances, their isolation method, and any known limitations.">
+<meta name="keywords" content="Parallel Spaces compatible apps, multi-instance mac apps, which apps work parallel spaces, mac multi-account compatibility, macOS multiple instances">
+<link rel="canonical" href="https://parallelspaces.github.io/compatibility.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Parallel Spaces">
+<meta property="og:title" content="App Compatibility — Parallel Spaces">
+<meta property="og:description" content="Which Mac apps work with Parallel Spaces — live compatibility catalog, updated automatically.">
+<meta property="og:url" content="https://parallelspaces.github.io/compatibility.html">
+<meta property="og:image" content="https://parallelspaces.github.io/assets/img/icon.svg">
+
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/styles.css">
+
+<style>
+/* ── Compatibility page extras ─────────────────────────────── */
+
+/* Stats bar */
+.compat-stats {
+  display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 44px;
+  padding: 22px 28px; border-radius: var(--radius-sm);
+  background: var(--bg-card); border: 1px solid var(--line);
+  box-shadow: var(--shadow-soft);
+}
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num  { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
+.stat-lbl  { font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+.stat-sep  { width: 1px; background: var(--line); align-self: stretch; margin: 0 4px; }
+
+/* Search + filter bar */
+.compat-controls {
+  display: flex; gap: 14px; align-items: flex-start;
+  flex-wrap: wrap; margin-bottom: 32px;
+}
+.compat-search-wrap {
+  position: relative; flex: 1; min-width: 200px;
+}
+.compat-search-wrap svg {
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--text-faint); pointer-events: none;
+  display: inline; max-width: none;
+}
+#search {
+  width: 100%; padding: 10px 14px 10px 40px;
+  border-radius: 980px; border: 1px solid var(--line);
+  background: var(--bg-card); color: var(--text);
+  font-family: inherit; font-size: 15px;
+  outline: none; transition: border-color .15s ease;
+}
+#search:focus { border-color: var(--accent); }
+#search::placeholder { color: var(--text-faint); }
+
+/* Category filter chips */
+.filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 980px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text-soft); cursor: pointer; border: none; font-family: inherit;
+  transition: background .15s ease, color .15s ease;
+}
+.chip:hover { background: color-mix(in srgb, var(--text) 10%, transparent); }
+.chip.active { background: var(--accent); color: #fff; }
+
+/* App grid */
+.compat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* App card */
+.app-card {
+  background: var(--bg-card); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 20px;
+  box-shadow: var(--shadow-soft);
+  display: flex; flex-direction: column; gap: 12px;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.app-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.app-card-head { display: flex; align-items: flex-start; gap: 12px; }
+.app-icon-wrap {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--accent) 80%, var(--bg-card)),
+    color-mix(in srgb, var(--accent-2) 60%, var(--bg-card)));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.app-icon-img {
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+  object-fit: contain;
+}
+.app-title-group { flex: 1; min-width: 0; }
+.app-name {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.app-dev {
+  font-size: 12px; color: var(--text-faint); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Tier badge */
+.tier-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 980px;
+  margin-top: 6px;
+}
+.tier-badge svg { width: 10px; height: 10px; display: inline; max-width: none; }
+.tier-works-great  { background: color-mix(in srgb, #34c759 14%, transparent); color: #1a7a2e; }
+.tier-usually-works{ background: color-mix(in srgb, #ff9500 14%, transparent); color: #a05a00; }
+.tier-community    { background: color-mix(in srgb, #5ac8fa 14%, transparent); color: #0071a4; }
+.tier-known-issues { background: color-mix(in srgb, #ff3b30 14%, transparent); color: #a0000a; }
+
+@media (prefers-color-scheme: dark) {
+  .tier-works-great  { color: #34c759; }
+  .tier-usually-works{ color: #ff9500; }
+  .tier-community    { color: #5ac8fa; }
+  .tier-known-issues { color: #ff453a; }
+}
+
+/* Properties row */
+.app-props { display: flex; gap: 6px; flex-wrap: wrap; }
+.prop-pill {
+  font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px;
+  background: color-mix(in srgb, var(--text) 6%, transparent);
+  color: var(--text-soft);
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.prop-pill.good { background: color-mix(in srgb, #34c759 10%, transparent); color: #1a7a2e; }
+@media (prefers-color-scheme: dark) {
+  .prop-pill.good { color: #34c759; }
+}
+
+/* Notes */
+.app-notes {
+  font-size: 12px; color: var(--text-faint); line-height: 1.4;
+  border-top: 1px solid var(--line); padding-top: 10px;
+}
+
+/* Empty / loading states */
+.compat-status {
+  text-align: center; padding: 80px 24px; color: var(--text-faint); font-size: 16px;
+}
+.compat-spinner {
+  width: 32px; height: 32px; border: 2px solid var(--line);
+  border-top-color: var(--accent); border-radius: 50%;
+  margin: 0 auto 16px; animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Last-updated bar */
+.compat-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px;
+  font-size: 13px; color: var(--text-faint); margin-bottom: 28px;
+}
+.compat-refresh-btn {
+  font-size: 13px; color: var(--accent-ink); background: none; border: none;
+  cursor: pointer; font-family: inherit; padding: 0; text-decoration: underline;
+}
+.compat-refresh-btn:hover { opacity: .75; }
+
+/* No-results */
+.no-results {
+  grid-column: 1 / -1; text-align: center;
+  padding: 60px 24px; color: var(--text-faint); font-size: 16px;
+}
+
+/* Section grouping within grid */
+.category-header {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 600;
+  color: var(--accent-ink); text-transform: uppercase; letter-spacing: .04em;
+  margin-top: 12px;
+}
+.category-header:first-child { margin-top: 0; }
+.cat-count {
+  font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 980px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent-ink);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .compat-grid { grid-template-columns: repeat(2, 1fr); }
+  .compat-stats { gap: 18px; }
+  .stat-sep { display: none; }
+}
+@media (max-width: 600px) {
+  .compat-grid { grid-template-columns: 1fr; }
+  .compat-controls { flex-direction: column; }
+  .compat-stats { flex-direction: column; gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/img/icon.svg" alt="Parallel Spaces icon">
+      Parallel Spaces
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#how">How it works</a>
+      <a href="compatibility.html" style="color:var(--text);font-weight:600">Compatibility</a>
+      <a href="whats-new.html">What's New</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <a class="nav-cta" href="https://apps.apple.com/app/id6772172563">Download</a>
+  </div>
+</nav>
+
+<!-- ===================== PAGE HERO ===================== -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">App Catalog</div>
+    <h1>Compatibility</h1>
+    <p>Which Mac apps work with Parallel Spaces — and how.<br>
+       Live from the catalog · updated every 6 hours.</p>
+  </div>
+</header>
+
+<!-- ===================== CATALOG ===================== -->
+<section style="padding-top:32px;">
+  <div class="wrap">
+
+    <!-- Stats bar -->
+    <div class="compat-stats" id="stats-bar" style="display:none">
+      <div class="stat-item">
+        <span class="stat-num" id="stat-total">—</span>
+        <span class="stat-lbl">Total apps</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num" id="stat-great" style="color:#34c759">—</span>
+        <span class="stat-lbl">Works great</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num" id="stat-usually" style="color:#ff9500">—</span>
+        <span class="stat-lbl">Usually works</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num" id="stat-community" style="color:#5ac8fa">—</span>
+        <span class="stat-lbl">Community</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <span class="stat-num" id="stat-issues" style="color:#ff3b30">—</span>
+        <span class="stat-lbl">Known issues</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="compat-controls">
+      <div class="compat-search-wrap">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="8.5" cy="8.5" r="5.5"/><line x1="13" y1="13" x2="18" y2="18"/>
+        </svg>
+        <input type="search" id="search" placeholder="Search apps…" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="filter-chips" id="filter-chips">
+        <button class="chip active" data-cat="all">All</button>
+      </div>
+    </div>
+
+    <!-- Last-updated meta -->
+    <div class="compat-meta" id="compat-meta" style="display:none">
+      <span id="last-updated-text"></span>
+      <button class="compat-refresh-btn" id="refresh-btn">Refresh now</button>
+    </div>
+
+    <!-- Main grid / status -->
+    <div id="catalog-status" class="compat-status">
+      <div class="compat-spinner"></div>
+      Loading catalog…
+    </div>
+    <div class="compat-grid" id="catalog-grid" style="display:none"></div>
+
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Ready to try it?</h2>
+    <p>On the Mac App Store. Your accounts, finally apart.</p>
+    <a class="appstore-badge" href="https://apps.apple.com/app/id6772172563" aria-label="Download Parallel Spaces on the Mac App Store">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/img/app-store-badge-white.svg">
+        <img src="assets/img/app-store-badge-black.svg" alt="Download on the Mac App Store" width="156" height="40">
+      </picture>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/img/icon.svg" alt="Parallel Spaces icon">
+          <span>Parallel Spaces</span>
+        </div>
+        <p>Run any Mac app multiple times. Independent accounts, fully isolated, on a single Mac.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#how">How it works</a></li>
+          <li><a href="compatibility.html">Compatibility</a></li>
+          <li><a href="whats-new.html">What's New</a></li>
+          <li><a href="https://apps.apple.com/app/id6772172563">Mac App Store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="mailto:29satnam@gmail.com">29satnam@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>Made with ❤️ by Satnam · Made for macOS</span>
+      <span>© 2026 Parallel Spaces</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  const CATALOG_URL  = 'https://parallel-spaces-catalog.pages.dev/catalog.json';
+  const CACHE_KEY    = 'ps_catalog_v2';
+  const CACHE_TS_KEY = 'ps_catalog_ts_v2';
+  const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
+
+  const TIER_META = {
+    'works-great':   { label: 'Works Great',   cls: 'tier-works-great',   dot: '#34c759' },
+    'usually-works': { label: 'Usually Works',  cls: 'tier-usually-works', dot: '#ff9500' },
+    'community':     { label: 'Community',      cls: 'tier-community',     dot: '#5ac8fa' },
+    'known-issues':  { label: 'Known Issues',   cls: 'tier-known-issues',  dot: '#ff3b30' },
+  };
+
+  const CAT_META = {
+    messaging:    { label: 'Messaging',    icon: '💬' },
+    browsers:     { label: 'Browsers',     icon: '🌐' },
+    productivity: { label: 'Productivity', icon: '💼' },
+    development:  { label: 'Development',  icon: '🛠️' },
+    ai:           { label: 'AI',           icon: '✨' },
+    media:        { label: 'Media',        icon: '🎵' },
+    utilities:    { label: 'Utilities',    icon: '🔧' },
+    system:       { label: 'System',       icon: '⚙️' },
+  };
+
+  const MODE_LABEL = {
+    auto:         'Auto-detect',
+    homeOverride: 'HOME Isolation',
+    chromiumLike: 'Chromium',
+    firefoxLike:  'Firefox',
+    electronLike: 'Electron',
+    custom:       'Custom',
+  };
+
+  let allApps    = [];
+  let activecat  = 'all';
+  let searchTerm = '';
+  let fetchedAt  = null;
+  let refreshTimer = null;
+
+  // ── DOM refs ───────────────────────────────────────────────
+  const statusEl   = document.getElementById('catalog-status');
+  const gridEl     = document.getElementById('catalog-grid');
+  const statsBar   = document.getElementById('stats-bar');
+  const metaBar    = document.getElementById('compat-meta');
+  const searchEl   = document.getElementById('search');
+  const chipsEl    = document.getElementById('filter-chips');
+  const updatedEl  = document.getElementById('last-updated-text');
+  const refreshBtn = document.getElementById('refresh-btn');
+
+  // ── Fetch ─────────────────────────────────────────────────
+  async function loadCatalog(force) {
+    if (!force) {
+      try {
+        const ts   = parseInt(sessionStorage.getItem(CACHE_TS_KEY) || '0', 10);
+        const data = sessionStorage.getItem(CACHE_KEY);
+        if (data && Date.now() - ts < SIX_HOURS_MS) {
+          hydrate(JSON.parse(data), new Date(ts));
+          return;
+        }
+      } catch (_) {}
+    }
+
+    showStatus('<div class="compat-spinner"></div>Loading catalog…');
+
+    try {
+      const res  = await fetch(CATALOG_URL, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      sessionStorage.setItem(CACHE_TS_KEY, String(Date.now()));
+      hydrate(data, new Date());
+    } catch (err) {
+      showStatus(
+        `<p style="font-size:15px">Could not load the catalog.<br>
+         <span style="font-size:13px;color:var(--text-faint)">${err.message}</span></p>
+         <button class="compat-refresh-btn" onclick="location.reload()" style="margin-top:12px;display:inline-block">Try again</button>`
+      );
+    }
+  }
+
+  function hydrate(data, ts) {
+    allApps   = (data.data || []).filter(a => a.bundleId); // skip generic entries without bundle ID
+    fetchedAt = ts;
+    buildChips();
+    updateStats();
+    renderGrid();
+    showMeta();
+    scheduleAutoRefresh();
+  }
+
+  // ── Auto-refresh ──────────────────────────────────────────
+  function scheduleAutoRefresh() {
+    if (refreshTimer) clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(() => loadCatalog(true), SIX_HOURS_MS);
+  }
+
+  // ── Stats bar ─────────────────────────────────────────────
+  function updateStats() {
+    const visible = filteredApps();
+    document.getElementById('stat-total').textContent    = visible.length;
+    document.getElementById('stat-great').textContent    = visible.filter(a => a.support.tier === 'works-great').length;
+    document.getElementById('stat-usually').textContent  = visible.filter(a => a.support.tier === 'usually-works').length;
+    document.getElementById('stat-community').textContent= visible.filter(a => a.support.tier === 'community').length;
+    document.getElementById('stat-issues').textContent   = visible.filter(a => a.support.tier === 'known-issues').length;
+    statsBar.style.display = '';
+  }
+
+  // ── Category chips ────────────────────────────────────────
+  function buildChips() {
+    const cats = [...new Set(allApps.map(a => a.category))].sort((a, b) => {
+      const order = ['messaging','browsers','productivity','development','ai','media','utilities','system'];
+      return (order.indexOf(a) + 1 || 99) - (order.indexOf(b) + 1 || 99);
+    });
+
+    chipsEl.innerHTML = '<button class="chip active" data-cat="all">All</button>';
+    cats.forEach(cat => {
+      const m   = CAT_META[cat] || { label: cat, icon: '' };
+      const btn = document.createElement('button');
+      btn.className   = 'chip';
+      btn.dataset.cat = cat;
+      btn.textContent = `${m.icon} ${m.label}`.trim();
+      chipsEl.appendChild(btn);
+    });
+
+    chipsEl.addEventListener('click', e => {
+      const btn = e.target.closest('[data-cat]');
+      if (!btn) return;
+      activecat = btn.dataset.cat;
+      chipsEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === btn));
+      updateStats();
+      renderGrid();
+    });
+  }
+
+  // ── Filtering ─────────────────────────────────────────────
+  function filteredApps() {
+    return allApps.filter(a => {
+      const catOk  = activecat === 'all' || a.category === activecat;
+      const needle = searchTerm.toLowerCase();
+      const textOk = !needle
+        || a.name.toLowerCase().includes(needle)
+        || (a.developer || '').toLowerCase().includes(needle)
+        || (a.bundleId  || '').toLowerCase().includes(needle);
+      return catOk && textOk;
+    });
+  }
+
+  // ── Render ────────────────────────────────────────────────
+  function renderGrid() {
+    const apps = filteredApps();
+    gridEl.innerHTML = '';
+
+    if (apps.length === 0) {
+      gridEl.innerHTML = '<div class="no-results">No apps match your search.</div>';
+      gridEl.style.display = 'grid';
+      statusEl.style.display = 'none';
+      return;
+    }
+
+    // Group by category when showing "All"
+    if (activecat === 'all' && !searchTerm) {
+      const catOrder = ['messaging','browsers','productivity','development','ai','media','utilities','system'];
+      const groups   = {};
+      apps.forEach(a => { (groups[a.category] = groups[a.category] || []).push(a); });
+      catOrder.concat(Object.keys(groups).filter(c => !catOrder.includes(c))).forEach(cat => {
+        if (!groups[cat]) return;
+        const m = CAT_META[cat] || { label: cat, icon: '' };
+        const hdr = document.createElement('div');
+        hdr.className   = 'category-header';
+        hdr.innerHTML   = `${m.icon ? `<span>${m.icon}</span>` : ''} ${m.label} <span class="cat-count">${groups[cat].length}</span>`;
+        gridEl.appendChild(hdr);
+        groups[cat].forEach(a => gridEl.appendChild(makeCard(a)));
+      });
+    } else {
+      apps.forEach(a => gridEl.appendChild(makeCard(a)));
+    }
+
+    gridEl.style.display = 'grid';
+    statusEl.style.display = 'none';
+  }
+
+  function makeCard(app) {
+    const s    = app.support;
+    const tier = TIER_META[s.tier] || { label: s.tier, cls: 'tier-community', dot: '#8e8e93' };
+    const mode = MODE_LABEL[app.launch?.storageMode] || app.launch?.storageMode || 'Auto';
+
+    const card = document.createElement('div');
+    card.className = 'app-card';
+
+    const initial = (app.name || '?')[0].toUpperCase();
+
+    card.innerHTML = `
+      <div class="app-card-head">
+        <div class="app-icon-wrap" aria-hidden="true">${initial}</div>
+        <div class="app-title-group">
+          <div class="app-name" title="${esc(app.name)}">${esc(app.name)}</div>
+          <div class="app-dev">${esc(app.developer || '')}</div>
+          <span class="tier-badge ${tier.cls}">
+            <svg viewBox="0 0 10 10" fill="${tier.dot}"><circle cx="5" cy="5" r="4.5"/></svg>
+            ${tier.label}
+          </span>
+        </div>
+      </div>
+      <div class="app-props">
+        ${s.multiInstance   ? '<span class="prop-pill good">✓ Multi-instance</span>'      : ''}
+        ${s.separateData    ? '<span class="prop-pill good">✓ Separate data</span>'        : ''}
+        ${s.menuBarPerInstance ? '<span class="prop-pill good">✓ Menu bar</span>'          : ''}
+        <span class="prop-pill">${esc(mode)}</span>
+      </div>
+      ${s.notes ? `<div class="app-notes">${esc(s.notes)}</div>` : ''}
+    `;
+    return card;
+  }
+
+  function esc(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── UI helpers ────────────────────────────────────────────
+  function showStatus(html) {
+    statusEl.innerHTML = html;
+    statusEl.style.display = '';
+    gridEl.style.display   = 'none';
+  }
+
+  function showMeta() {
+    const ago = formatAge(fetchedAt);
+    updatedEl.textContent = `Catalog fetched ${ago}`;
+    metaBar.style.display = '';
+  }
+
+  function formatAge(ts) {
+    if (!ts) return '';
+    const diffMs = Date.now() - ts.getTime();
+    const diffMin = Math.floor(diffMs / 60000);
+    if (diffMin < 1) return 'just now';
+    if (diffMin < 60) return `${diffMin} minute${diffMin === 1 ? '' : 's'} ago`;
+    const diffH = Math.floor(diffMin / 60);
+    return `${diffH} hour${diffH === 1 ? '' : 's'} ago`;
+  }
+
+  // ── Events ────────────────────────────────────────────────
+  searchEl.addEventListener('input', () => {
+    searchTerm = searchEl.value.trim();
+    updateStats();
+    renderGrid();
+  });
+
+  refreshBtn.addEventListener('click', () => loadCatalog(true));
+
+  // Update "X minutes ago" text every minute
+  setInterval(() => { if (fetchedAt) showMeta(); }, 60000);
+
+  // ── Boot ─────────────────────────────────────────────────
+  loadCatalog(false);
+})();
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
