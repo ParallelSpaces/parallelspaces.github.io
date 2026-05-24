@@ -310,28 +310,25 @@
   <div class="modal-box">
     <button class="modal-close" id="modal-close-btn" aria-label="Close">×</button>
 
-    <!-- Form view — native POST, no AJAX, FormSubmit redirects back with ?thanks=1 -->
+    <!-- Form view — opens user's mail client with pre-filled message -->
     <div id="modal-form-view">
       <h2 id="modal-title">Request an App</h2>
-      <p class="modal-sub">Don't see your app? Let us know — we'll test it and add it to the catalog.</p>
-      <form id="request-form" action="https://formsubmit.co/29satnam@gmail.com" method="POST">
-        <input type="hidden" name="_subject"  value="App Request — Parallel Spaces">
-        <input type="hidden" name="_captcha"  value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next"     value="https://parallelspaces.github.io/compatibility.html?thanks=1">
+      <p class="modal-sub">Don't see your app? Tell us — we'll test it and add it to the catalog. Your mail app will open with the message pre-filled; just hit send.</p>
+      <form id="request-form" onsubmit="return false;">
         <div class="form-field">
           <label for="req-name">App Name</label>
-          <input type="text" name="App Name" id="req-name" placeholder="e.g. Figma" autocomplete="off" required>
+          <input type="text" id="req-name" placeholder="e.g. Figma" autocomplete="off" required>
         </div>
         <div class="form-field">
           <label for="req-link">App Website or Download Link</label>
-          <input type="url" name="App Link" id="req-link" placeholder="https://…" autocomplete="off">
+          <input type="url" id="req-link" placeholder="https://…" autocomplete="off">
         </div>
         <div class="form-field">
           <label for="req-email">Your Email <span style="color:var(--text-faint);font-weight:400">(optional)</span></label>
-          <input type="email" name="User Email" id="req-email" placeholder="you@example.com" autocomplete="email">
+          <input type="email" id="req-email" placeholder="you@example.com" autocomplete="email">
         </div>
-        <button type="submit" class="modal-submit" id="modal-submit-btn">Send Request</button>
+        <button type="submit" class="modal-submit" id="modal-submit-btn">Open Mail App to Send</button>
+        <p class="modal-err" id="modal-err" style="display:none"></p>
       </form>
     </div>
 
@@ -726,25 +723,39 @@
   const backdrop    = document.getElementById('request-modal');
   const openBtn     = document.getElementById('request-app-btn');
   const closeBtn    = document.getElementById('modal-close-btn');
+  const submitBtn   = document.getElementById('modal-submit-btn');
   const doneBtn     = document.getElementById('modal-done-btn');
   const formView    = document.getElementById('modal-form-view');
   const successView = document.getElementById('modal-success-view');
+  const errEl       = document.getElementById('modal-err');
+  const nameEl      = document.getElementById('req-name');
+  const linkEl      = document.getElementById('req-link');
+  const emailEl     = document.getElementById('req-email');
 
-  function openModal(showSuccess) {
-    if (showSuccess) {
-      formView.style.display    = 'none';
-      successView.style.display = '';
-    }
+  function openModal() {
+    formView.style.display    = '';
+    successView.style.display = 'none';
+    errEl.style.display       = 'none';
+    errEl.textContent         = '';
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
+    setTimeout(() => nameEl.focus(), 50);
   }
 
   function closeModal() {
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
+    setTimeout(() => {
+      nameEl.value = linkEl.value = emailEl.value = '';
+    }, 300);
   }
 
-  openBtn.addEventListener('click', () => openModal(false));
+  function showSuccess() {
+    formView.style.display    = 'none';
+    successView.style.display = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
   doneBtn.addEventListener('click', closeModal);
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
@@ -752,11 +763,31 @@
     if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
   });
 
-  // FormSubmit redirects back with ?thanks=1 after successful POST
-  if (new URLSearchParams(location.search).get('thanks') === '1') {
-    history.replaceState({}, '', location.pathname);
-    openModal(true);
-  }
+  submitBtn.addEventListener('click', () => {
+    const name  = nameEl.value.trim();
+    const link  = linkEl.value.trim();
+    const email = emailEl.value.trim();
+
+    if (!name) {
+      errEl.textContent   = 'App name is required.';
+      errEl.style.display = '';
+      nameEl.focus();
+      return;
+    }
+
+    const subject = `App Request: ${name}`;
+    const body =
+      `App Name: ${name}\n` +
+      `App Link: ${link || '(not provided)'}\n` +
+      `User Email: ${email || '(not provided)'}\n\n` +
+      `— Sent from parallelspaces.github.io/compatibility`;
+
+    const mailto = `mailto:29satnam@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+
+    // Show success after small delay so mail client has time to open
+    setTimeout(showSuccess, 400);
+  });
 })();
 </script>
 
