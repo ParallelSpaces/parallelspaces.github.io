@@ -9,6 +9,52 @@
         sends no CORS headers, so we use JSONP via ?callback=.
    ============================================================ */
 
+/* ---- 0. Mobile nav hamburger ------------------------------- */
+(function () {
+  "use strict";
+  var nav = document.querySelector(".nav");
+  if (!nav) return;
+  var wrap  = nav.querySelector(".wrap");
+  var links = nav.querySelector(".nav-links");
+  var cta   = nav.querySelector(".nav-cta");
+  if (!wrap || !links) return;
+
+  var btn = document.createElement("button");
+  btn.className = "nav-toggle";
+  btn.setAttribute("aria-label", "Open menu");
+  btn.setAttribute("aria-expanded", "false");
+  btn.innerHTML = "<span></span><span></span><span></span>";
+
+  // Insert before CTA so order is: brand … links … hamburger … CTA
+  if (cta) wrap.insertBefore(btn, cta);
+  else     wrap.appendChild(btn);
+
+  function setOpen(open) {
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+
+  btn.addEventListener("click", function () {
+    setOpen(!nav.classList.contains("open"));
+  });
+
+  // Close when a link in the menu is tapped
+  links.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") setOpen(false);
+  });
+
+  // Close on resize back to desktop
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 760 && nav.classList.contains("open")) setOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && nav.classList.contains("open")) setOpen(false);
+  });
+})();
+
 /* ---- 1. Mac App Store deep-link ---------------------------- */
 (function () {
   "use strict";
