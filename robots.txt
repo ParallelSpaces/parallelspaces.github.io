@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://parallelspaces.github.io/parallelspaces/sitemap.xml
+# Block AI scrapers that ignore robots? Keep open for now — discoverability matters.
+
+Sitemap: https://parallelspaces.github.io/sitemap.xml

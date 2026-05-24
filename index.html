@@ -31,17 +31,84 @@
 <link rel="apple-touch-icon" sizes="256x256" href="assets/img/icon-256.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 
-<!-- Structured data -->
+<link rel="preconnect" href="https://parallel-spaces-catalog.pages.dev" crossorigin>
+<link rel="dns-prefetch" href="https://apps.apple.com">
+
+<!-- Structured data: SoftwareApplication -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Parallel Spaces",
+  "alternateName": ["Multi-Instance App Launcher", "Multi Account Mac"],
   "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "macOS",
-  "description": "Run multiple, fully isolated copies of any Mac app. Separate logins and data per space.",
+  "applicationSubCategory": "ProductivityApplication",
+  "operatingSystem": "macOS 14.0 or later",
+  "description": "Run multiple, fully isolated copies of any Mac app — two Slacks, two Chromes, two WhatsApps, side by side. Separate logins and data per space. Native, private, no virtual machine.",
   "url": "https://parallelspaces.github.io/",
-  "downloadUrl": "https://apps.apple.com/app/id6772172563"
+  "downloadUrl": "https://apps.apple.com/app/id6772172563",
+  "installUrl": "https://apps.apple.com/app/id6772172563",
+  "image": "https://parallelspaces.github.io/assets/img/icon-1024.png",
+  "screenshot": [
+    "https://parallelspaces.github.io/assets/img/hero.png",
+    "https://parallelspaces.github.io/assets/img/screenshot-1.png",
+    "https://parallelspaces.github.io/assets/img/screenshot-2.png",
+    "https://parallelspaces.github.io/assets/img/screenshot-3.png",
+    "https://parallelspaces.github.io/assets/img/screenshot-4.png"
+  ],
+  "softwareVersion": "1.0",
+  "featureList": [
+    "Run multiple instances of the same Mac app",
+    "Fully isolated data per instance — separate logins, cookies, history",
+    "Turn any website into a standalone Mac app with native notifications",
+    "Per-instance menu bar and Dock icons with custom colors and badges",
+    "Erase-on-close for disposable instances",
+    "Native Chromium, Firefox, and Electron isolation modes",
+    "No virtual machine, no container — runs at full native speed"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://apps.apple.com/app/id6772172563"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Parallel Spaces",
+    "url": "https://parallelspaces.github.io/"
+  }
+}
+</script>
+<!-- HowTo schema for "how it works" section -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to run multiple instances of a Mac app",
+  "description": "Create an isolated second copy of any Mac app with its own login and data.",
+  "totalTime": "PT1M",
+  "supply": [{"@type": "HowToSupply", "name": "Parallel Spaces"}],
+  "step": [
+    {"@type": "HowToStep", "position": 1, "name": "Pick an app", "text": "Choose any app on your Mac — or turn a website into one."},
+    {"@type": "HowToStep", "position": 2, "name": "Name your space", "text": "Give it a name, color and badge so you always know which is which."},
+    {"@type": "HowToStep", "position": 3, "name": "Parallel Spaces builds it", "text": "It creates a separate launcher with its own private, isolated storage."},
+    {"@type": "HowToStep", "position": 4, "name": "Launch and sign in", "text": "It opens as its own app, with its own account. Make as many as you need."}
+  ]
+}
+</script>
+<!-- Organization / WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Parallel Spaces",
+  "url": "https://parallelspaces.github.io/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://parallelspaces.github.io/compatibility.html?q={search_term}",
+    "query-input": "required name=search_term"
+  }
 }
 </script>
 </head>
