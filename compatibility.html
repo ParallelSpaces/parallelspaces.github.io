@@ -310,27 +310,32 @@
   <div class="modal-box">
     <button class="modal-close" id="modal-close-btn" aria-label="Close">×</button>
 
-    <!-- Form view -->
+    <!-- Form view — native POST, no AJAX, FormSubmit redirects back with ?thanks=1 -->
     <div id="modal-form-view">
       <h2 id="modal-title">Request an App</h2>
       <p class="modal-sub">Don't see your app? Let us know — we'll test it and add it to the catalog.</p>
-      <div class="form-field">
-        <label for="req-name">App Name</label>
-        <input type="text" id="req-name" placeholder="e.g. Figma" autocomplete="off" required>
-      </div>
-      <div class="form-field">
-        <label for="req-link">App Website or Download Link</label>
-        <input type="url" id="req-link" placeholder="https://…" autocomplete="off">
-      </div>
-      <div class="form-field">
-        <label for="req-email">Your Email <span style="color:var(--text-faint);font-weight:400">(optional)</span></label>
-        <input type="email" id="req-email" placeholder="you@example.com" autocomplete="email">
-      </div>
-      <button class="modal-submit" id="modal-submit-btn">Send Request</button>
-      <p class="modal-err" id="modal-err" style="display:none"></p>
+      <form id="request-form" action="https://formsubmit.co/29satnam@gmail.com" method="POST">
+        <input type="hidden" name="_subject"  value="App Request — Parallel Spaces">
+        <input type="hidden" name="_captcha"  value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next"     value="https://parallelspaces.github.io/compatibility.html?thanks=1">
+        <div class="form-field">
+          <label for="req-name">App Name</label>
+          <input type="text" name="App Name" id="req-name" placeholder="e.g. Figma" autocomplete="off" required>
+        </div>
+        <div class="form-field">
+          <label for="req-link">App Website or Download Link</label>
+          <input type="url" name="App Link" id="req-link" placeholder="https://…" autocomplete="off">
+        </div>
+        <div class="form-field">
+          <label for="req-email">Your Email <span style="color:var(--text-faint);font-weight:400">(optional)</span></label>
+          <input type="email" name="User Email" id="req-email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <button type="submit" class="modal-submit" id="modal-submit-btn">Send Request</button>
+      </form>
     </div>
 
-    <!-- Success view -->
+    <!-- Success view — shown when page loads with ?thanks=1 -->
     <div id="modal-success-view" class="modal-success" style="display:none">
       <div class="success-ic">✓</div>
       <h3>Request sent!</h3>
@@ -718,94 +723,39 @@
 (function () {
   'use strict';
 
-  const backdrop   = document.getElementById('request-modal');
-  const openBtn    = document.getElementById('request-app-btn');
-  const closeBtn   = document.getElementById('modal-close-btn');
-  const submitBtn  = document.getElementById('modal-submit-btn');
-  const doneBtn    = document.getElementById('modal-done-btn');
-  const formView   = document.getElementById('modal-form-view');
-  const successView= document.getElementById('modal-success-view');
-  const errEl      = document.getElementById('modal-err');
-  const nameEl     = document.getElementById('req-name');
-  const linkEl     = document.getElementById('req-link');
-  const emailEl    = document.getElementById('req-email');
+  const backdrop    = document.getElementById('request-modal');
+  const openBtn     = document.getElementById('request-app-btn');
+  const closeBtn    = document.getElementById('modal-close-btn');
+  const doneBtn     = document.getElementById('modal-done-btn');
+  const formView    = document.getElementById('modal-form-view');
+  const successView = document.getElementById('modal-success-view');
 
-  function openModal() {
+  function openModal(showSuccess) {
+    if (showSuccess) {
+      formView.style.display    = 'none';
+      successView.style.display = '';
+    }
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
-    nameEl.focus();
   }
 
   function closeModal() {
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
-    // reset after animation
-    setTimeout(() => {
-      formView.style.display    = '';
-      successView.style.display = 'none';
-      errEl.style.display       = 'none';
-      errEl.textContent         = '';
-      nameEl.value = linkEl.value = emailEl.value = '';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Request';
-    }, 300);
   }
 
-  openBtn.addEventListener('click', openModal);
+  openBtn.addEventListener('click', () => openModal(false));
   closeBtn.addEventListener('click', closeModal);
   doneBtn.addEventListener('click', closeModal);
-
-  // Close on backdrop click
   backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
-
-  // Close on Escape
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
   });
 
-  submitBtn.addEventListener('click', async () => {
-    const name  = nameEl.value.trim();
-    const link  = linkEl.value.trim();
-    const email = emailEl.value.trim();
-
-    if (!name) {
-      showErr('App name is required.');
-      nameEl.focus();
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    errEl.style.display = 'none';
-
-    try {
-      const res = await fetch('https://formsubmit.co/ajax/29satnam@gmail.com', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          _subject: `App Request: ${name}`,
-          'App Name': name,
-          'App Link': link || '(not provided)',
-          'User Email': email || '(not provided)',
-          _captcha: 'false',
-          _template: 'table',
-        }),
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-
-      formView.style.display    = 'none';
-      successView.style.display = '';
-    } catch (err) {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Request';
-      showErr('Something went wrong. Please try again or email 29satnam@gmail.com directly.');
-    }
-  });
-
-  function showErr(msg) {
-    errEl.textContent    = msg;
-    errEl.style.display  = '';
+  // FormSubmit redirects back with ?thanks=1 after successful POST
+  if (new URLSearchParams(location.search).get('thanks') === '1') {
+    history.replaceState({}, '', location.pathname);
+    openModal(true);
   }
 })();
 </script>
