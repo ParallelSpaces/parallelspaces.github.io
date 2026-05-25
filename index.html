@@ -140,11 +140,15 @@
   <div class="wrap">
     <div class="hero-grid">
 
-      <!-- LEFT — hero landing screenshot -->
-      <figure class="hero-mock" aria-label="Parallel Spaces app screenshot">
-        <img class="hero-img" src="assets/img/hero.png" fetchpriority="high"
-             alt="Parallel Spaces showing multiple isolated app instances side by side"
-             width="1024" loading="eager" decoding="async">
+      <!-- LEFT — hero landing video (muted, autoplay) -->
+      <figure class="hero-mock" aria-label="Parallel Spaces product video">
+        <video class="hero-img" autoplay muted loop playsinline preload="auto"
+               width="1280" height="720"
+               poster="assets/video/hero-poster.jpg"
+               aria-label="Parallel Spaces running multiple isolated app instances side by side">
+          <source src="assets/video/hero.webm" type="video/webm">
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
       </figure>
 
       <!-- RIGHT — brand + download -->
@@ -182,21 +186,6 @@
         <li><strong>For the multi-account life.</strong> Without the hacks and workarounds.</li>
       </ul>
     </div>
-  </div>
-</section>
-
-<!-- ===================== VIDEO ===================== -->
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">See it in action</div>
-      <h2>One Mac. Every account.</h2>
-      <p>Watch how Parallel Spaces turns a single app into as many independent spaces as you need.</p>
-    </div>
-    <div class="media-frame video-frame" role="img" aria-label="Product video placeholder">
-      <div class="play" aria-hidden="true"></div>
-    </div>
-    <p class="video-cap">Drop your product video or App Store preview here — replace this placeholder in <code>index.html</code>.</p>
   </div>
 </section>
 

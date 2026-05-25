@@ -314,30 +314,6 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
 
 /* ---- Media frames (video + screenshots) -------------------- */
 
-.media-frame {
-  border-radius: var(--radius); overflow: hidden;
-  border: 1px solid var(--line); background: var(--bg-card);
-  box-shadow: var(--shadow);
-}
-.video-frame {
-  aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg,
-    color-mix(in srgb, var(--accent) 22%, var(--bg-card)),
-    color-mix(in srgb, var(--accent-2) 16%, var(--bg-card)));
-  color: var(--text); position: relative;
-}
-.video-frame .play {
-  width: 76px; height: 76px; border-radius: 50%;
-  background: rgba(255,255,255,.92); display: flex;
-  align-items: center; justify-content: center; box-shadow: var(--shadow);
-}
-.video-frame .play::after {
-  content: ""; width: 0; height: 0; margin-left: 5px;
-  border-left: 22px solid var(--accent);
-  border-top: 13px solid transparent; border-bottom: 13px solid transparent;
-}
-.video-cap { margin-top: 14px; text-align: center; font-size: 14px; color: var(--text-faint); }
-
 .shots {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
 }
