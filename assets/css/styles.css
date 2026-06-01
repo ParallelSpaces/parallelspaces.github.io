@@ -149,17 +149,17 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
 .appstore-badge { display: inline-block; line-height: 0; transition: opacity .15s ease; }
 .appstore-badge:hover { opacity: .82; text-decoration: none; }
 .appstore-badge img,
-.appstore-badge svg { height: 48px; width: auto; display: block; }
+.appstore-badge svg { width: 187px; height: 48px; display: block; }
 
-/* Product Hunt badge — custom pill, sized to match Apple lockup */
+/* Product Hunt badge — custom pill, sized to match Apple lockup (≈187×48) */
 .ph-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  height: 48px; padding: 0 16px 0 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 187px; height: 48px; padding: 0 14px;
   border-radius: 10px;
   background: #000; color: #fff !important;
   font-family: inherit; line-height: 1;
   transition: opacity .15s ease, transform .15s ease;
-  box-sizing: border-box;
+  box-sizing: border-box; flex: none;
 }
 .ph-badge:hover { opacity: .88; text-decoration: none; transform: translateY(-1px); }
 .ph-badge .ph-mark { flex: none; display: block; }
