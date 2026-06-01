@@ -8,24 +8,35 @@
 <meta name="description" content="Parallel Spaces lets you run multiple, fully isolated copies of any Mac app — two Slacks, two Chromes, two WhatsApps, side by side. Separate logins and data per space. Native, private, no virtual machine. The missing multi-account feature, finally on Mac.">
 <meta name="keywords" content="run multiple instances mac, two accounts mac, multi-account mac app, run app twice macOS, parallel apps mac, dual app mac, multiple Slack accounts mac, multiple WhatsApp mac, site-specific browser mac, web app mac, macOS 14, macOS Sonoma">
 <meta name="author" content="Parallel Spaces">
+<meta name="robots" content="index,follow,max-image-preview:large,max-video-preview:-1,max-snippet:-1">
+<meta name="googlebot" content="index,follow,max-image-preview:large,max-video-preview:-1,max-snippet:-1">
 <link rel="canonical" href="https://parallelspaces.github.io/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Parallel Spaces">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Parallel Spaces — Run Any Mac App Multiple Times">
 <meta property="og:description" content="Run multiple, fully isolated copies of any Mac app. Two accounts, side by side. Native, private, no virtual machine.">
 <meta property="og:url" content="https://parallelspaces.github.io/">
 <meta property="og:image" content="https://parallelspaces.github.io/assets/img/icon-1024.png">
+<meta property="og:image:secure_url" content="https://parallelspaces.github.io/assets/img/icon-1024.png">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="Parallel Spaces app icon — purple gradient with stacked window glyphs">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="1024">
+<meta property="og:video" content="https://parallelspaces.github.io/assets/video/hero.mp4">
+<meta property="og:video:secure_url" content="https://parallelspaces.github.io/assets/video/hero.mp4">
+<meta property="og:video:type" content="video/mp4">
+<meta property="og:video:width" content="1280">
+<meta property="og:video:height" content="720">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Parallel Spaces — Run Any Mac App Multiple Times">
 <meta name="twitter:description" content="Run multiple, fully isolated copies of any Mac app. Two accounts, side by side. Native and private.">
 <meta name="twitter:image" content="https://parallelspaces.github.io/assets/img/icon-1024.png">
+<meta name="twitter:image:alt" content="Parallel Spaces — Run Any Mac App Multiple Times">
 
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -53,12 +64,21 @@
   "installUrl": "https://apps.apple.com/app/id6772172563",
   "image": "https://parallelspaces.github.io/assets/img/icon-1024.png",
   "screenshot": [
-    "https://parallelspaces.github.io/assets/img/hero.png",
+    "https://parallelspaces.github.io/assets/video/hero-poster.jpg",
     "https://parallelspaces.github.io/assets/img/screenshot-1.png",
     "https://parallelspaces.github.io/assets/img/screenshot-2.png",
     "https://parallelspaces.github.io/assets/img/screenshot-3.png",
     "https://parallelspaces.github.io/assets/img/screenshot-4.png"
   ],
+  "video": {
+    "@type": "VideoObject",
+    "name": "Parallel Spaces — product demo",
+    "description": "Run multiple, fully isolated copies of any Mac app — side by side, with separate logins and data per space.",
+    "thumbnailUrl": "https://parallelspaces.github.io/assets/video/hero-poster.jpg",
+    "contentUrl": "https://parallelspaces.github.io/assets/video/hero.mp4",
+    "uploadDate": "2026-05-26",
+    "duration": "PT30S"
+  },
   "softwareVersion": "1.0",
   "featureList": [
     "Run multiple instances of the same Mac app",
@@ -79,7 +99,37 @@
   "publisher": {
     "@type": "Organization",
     "name": "Parallel Spaces",
-    "url": "https://parallelspaces.github.io/"
+    "url": "https://parallelspaces.github.io/",
+    "logo": "https://parallelspaces.github.io/assets/img/icon-1024.png",
+    "sameAs": [
+      "https://apps.apple.com/app/id6772172563",
+      "https://www.producthunt.com/products/parallel-spaces-2",
+      "https://medium.com/@codetard"
+    ]
+  }
+}
+</script>
+<!-- Standalone VideoObject for richer video discovery -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Parallel Spaces — product demo",
+  "description": "Watch Parallel Spaces run multiple, fully isolated copies of the same Mac app — separate logins, separate data, side by side. Native, private, no virtual machine.",
+  "thumbnailUrl": [
+    "https://parallelspaces.github.io/assets/video/hero-poster.jpg"
+  ],
+  "uploadDate": "2026-05-26",
+  "duration": "PT30S",
+  "contentUrl": "https://parallelspaces.github.io/assets/video/hero.mp4",
+  "embedUrl": "https://parallelspaces.github.io/#",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Parallel Spaces",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://parallelspaces.github.io/assets/img/icon-1024.png"
+    }
   }
 }
 </script>
@@ -148,6 +198,9 @@
                aria-label="Parallel Spaces running multiple isolated app instances side by side">
           <source src="assets/video/hero.webm" type="video/webm">
           <source src="assets/video/hero.mp4" type="video/mp4">
+          <img src="assets/video/hero-poster.jpg" width="1280" height="720"
+               alt="Parallel Spaces showing multiple isolated Mac app instances side by side"
+               loading="eager" decoding="async">
         </video>
       </figure>
 
