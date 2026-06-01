@@ -151,6 +151,41 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
 .appstore-badge img,
 .appstore-badge svg { height: 48px; width: auto; display: block; }
 
+/* Product Hunt badge — custom pill, sized to match Apple lockup */
+.ph-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 48px; padding: 0 16px 0 12px;
+  border-radius: 10px;
+  background: #000; color: #fff !important;
+  font-family: inherit; line-height: 1;
+  transition: opacity .15s ease, transform .15s ease;
+  box-sizing: border-box;
+}
+.ph-badge:hover { opacity: .88; text-decoration: none; transform: translateY(-1px); }
+.ph-badge .ph-mark { flex: none; display: block; }
+.ph-badge .ph-text { display: inline-flex; flex-direction: column; gap: 2px; }
+.ph-badge .ph-eyebrow {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; opacity: .82;
+}
+.ph-badge .ph-title { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+@media (prefers-color-scheme: dark) {
+  .ph-badge { background: #fff; color: #000 !important; }
+}
+
+/* Secondary hero links row (replaces inline "See how it works" button) */
+.hero-links {
+  margin-top: 16px; display: flex; flex-wrap: wrap;
+  gap: 8px 22px; align-items: center;
+}
+.hero-link {
+  font-size: 14px; font-weight: 500;
+  color: var(--accent-ink) !important;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease, opacity .15s ease;
+}
+.hero-link:hover { border-bottom-color: currentColor; text-decoration: none; opacity: .9; }
+
 /* ---- Hero (split: mockup left, brand + download right) ------ */
 
 .hero {
@@ -625,7 +660,9 @@ h3 { font-size: 21px; letter-spacing: -0.01em; }
   .hero { padding: 36px 0 48px; }
   .hero-grid { gap: 28px; }
   .hero-cta { flex-direction: column; align-items: stretch; width: 100%; }
-  .hero-cta .btn, .hero-cta .appstore-badge { width: 100%; justify-content: center; }
+  .hero-cta .appstore-badge, .hero-cta .ph-badge { width: 100%; justify-content: center; }
+  .hero-cta .appstore-badge img, .hero-cta .appstore-badge svg { margin: 0 auto; }
+  .hero-links { justify-content: flex-start; }
   .hero-icon { width: 54px; height: 54px; }
   .hero-name { font-size: 18px; }
   .hero h1 { font-size: clamp(34px, 9vw, 44px); }
