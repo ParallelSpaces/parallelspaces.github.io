@@ -45,6 +45,7 @@
 <link rel="apple-touch-icon" sizes="256x256" href="assets/img/icon-256.png">
 <link rel="stylesheet" href="assets/css/styles.css">
 
+<link rel="preload" as="image" href="assets/video/hero-poster.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://parallel-spaces-catalog.pages.dev" crossorigin>
 <link rel="dns-prefetch" href="https://apps.apple.com">
 
@@ -194,13 +195,13 @@
       <figure class="hero-mock" aria-label="Parallel Spaces product video">
         <video class="hero-img" autoplay muted loop playsinline preload="auto"
                width="1280" height="720"
-               poster="assets/video/hero-poster.jpg"
+               poster="assets/video/hero-poster.webp"
                aria-label="Parallel Spaces running multiple isolated app instances side by side">
           <source src="assets/video/hero.webm" type="video/webm">
           <source src="assets/video/hero.mp4" type="video/mp4">
-          <img src="assets/video/hero-poster.jpg" width="1280" height="720"
+          <img src="assets/video/hero-poster.webp" width="1280" height="720"
                alt="Parallel Spaces showing multiple isolated Mac app instances side by side"
-               loading="eager" decoding="async">
+               loading="eager" decoding="async" fetchpriority="high">
         </video>
       </figure>
 
@@ -440,16 +441,28 @@
     </div>
     <div class="shots" id="screenshots-grid">
       <button class="shot" data-index="0" aria-label="Open screenshot 1">
-        <img src="assets/img/screenshot-1.png" alt="My Spaces — list of isolated app instances" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="assets/img/screenshot-1.webp" type="image/webp">
+          <img src="assets/img/screenshot-1.png" alt="My Spaces — list of isolated app instances" loading="lazy" decoding="async" width="1008" height="630">
+        </picture>
       </button>
       <button class="shot" data-index="1" aria-label="Open screenshot 2">
-        <img src="assets/img/screenshot-2.png" alt="New Space — pick an app to multi-instance" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="assets/img/screenshot-2.webp" type="image/webp">
+          <img src="assets/img/screenshot-2.png" alt="New Space — pick an app to multi-instance" loading="lazy" decoding="async" width="1008" height="630">
+        </picture>
       </button>
       <button class="shot" data-index="2" aria-label="Open screenshot 3">
-        <img src="assets/img/screenshot-3.png" alt="Set Up Instance — name, color, badge and isolation options" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="assets/img/screenshot-3.webp" type="image/webp">
+          <img src="assets/img/screenshot-3.png" alt="Set Up Instance — name, color, badge and isolation options" loading="lazy" decoding="async" width="1008" height="630">
+        </picture>
       </button>
       <button class="shot" data-index="3" aria-label="Open screenshot 4">
-        <img src="assets/img/screenshot-4.png" alt="Menu bar — quick access to all running spaces" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="assets/img/screenshot-4.webp" type="image/webp">
+          <img src="assets/img/screenshot-4.png" alt="Menu bar — quick access to all running spaces" loading="lazy" decoding="async" width="1008" height="630">
+        </picture>
       </button>
     </div>
   </div>
@@ -511,6 +524,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>

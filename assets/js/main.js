@@ -74,7 +74,7 @@
 
   var items = shots.map(function (btn) {
     var img = btn.querySelector("img");
-    return { src: img.src, alt: img.alt || "" };
+    return { src: img.currentSrc || img.src, alt: img.alt || "" };
   });
 
   var current = 0;
