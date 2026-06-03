@@ -3,4 +3,4 @@ Allow: /
 
 # Block AI scrapers that ignore robots? Keep open for now — discoverability matters.
 
-Sitemap: https://parallelspaces.github.io/sitemap.xml
+Sitemap: https://parallelspaces.app/sitemap.xml
