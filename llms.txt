@@ -1,0 +1,24 @@
+# Parallel Spaces
+
+> Parallel Spaces is a native macOS app that runs multiple, fully isolated copies of the same Mac app at once — two WhatsApps, two Telegrams, two Slacks, dual Viber, side by side. Each "space" has its own private storage, so separate accounts stay signed in simultaneously. Native, sandboxed, no virtual machine, distributed on the Mac App Store.
+
+## Key facts
+- Platform: macOS 14.0 Sonoma or later
+- Distribution: Mac App Store — https://apps.apple.com/app/id6772172563
+- Price: free
+- Privacy: no tracking, no analytics, no account, data stays on device
+- Works with: messaging apps (WhatsApp, Telegram, Slack, Discord, Viber, Signal), Chromium browsers, Electron apps, and any website turned into an isolated web app
+
+## Pages
+- [Home](https://parallelspaces.app/): What it does, popular dual-app setups, how it works, features
+- [Compatibility](https://parallelspaces.app/compatibility.html): Live catalog of 100+ supported Mac apps
+- [FAQ](https://parallelspaces.app/faq.html): How to run two WhatsApp / dual Telegram / multiple Slack accounts on Mac, sandbox limits, web apps
+- [What's New](https://parallelspaces.app/whats-new.html): Release notes
+- [Privacy Policy](https://parallelspaces.app/privacy.html): Data handling
+
+## Common questions answered
+- How to run multiple instances of the same app on Mac
+- How to run two WhatsApp accounts on a Mac
+- How to run dual Telegram on macOS
+- How to run multiple Slack accounts at once
+- Whether Viber, Signal, and Discord can run as multiple instances
