@@ -1,0 +1,39 @@
+name: IndexNow ping
+
+# Notifies IndexNow (Bing, Yandex, and other participating engines) whenever
+# site content changes on main, so new/updated pages get crawled fast.
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit URLs to IndexNow
+        run: |
+          KEY="9da4b10a1bba707d336ec4e454632afe"
+          HOST="parallelspaces.app"
+          curl -sS -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d '{
+              "host": "'"$HOST"'",
+              "key": "'"$KEY"'",
+              "keyLocation": "https://'"$HOST"'/'"$KEY"'.txt",
+              "urlList": [
+                "https://parallelspaces.app/",
+                "https://parallelspaces.app/alternatives.html",
+                "https://parallelspaces.app/compatibility.html",
+                "https://parallelspaces.app/faq.html",
+                "https://parallelspaces.app/whats-new.html",
+                "https://parallelspaces.app/privacy.html"
+              ]
+            }' \
+            -w "\nHTTP %{http_code}\n"
