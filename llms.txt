@@ -5,7 +5,7 @@
 ## Key facts
 - Platform: macOS 14.0 Sonoma or later
 - Distribution: Mac App Store — https://apps.apple.com/app/id6772172563
-- Price: free
+- Price: $4.99 (one-time, Mac App Store)
 - Privacy: no tracking, no analytics, no account, data stays on device
 - Works with: messaging apps (WhatsApp, Telegram, Slack, Discord, Viber, Signal), Chromium browsers, Electron apps, and any website turned into an isolated web app
 
